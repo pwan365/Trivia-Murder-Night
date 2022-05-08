@@ -1,6 +1,12 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, {Schema, HydratedDocument} from 'mongoose';
 
-const AnswerSchema = new Schema({
+export interface IAnswer {
+    _id: Schema.ObjectId;
+    context: string;
+    question: Schema.Types.ObjectId;
+    correct: boolean;
+}
+const AnswerSchema = new Schema<IAnswer>({
     _id: {
         type: Schema.ObjectId,
         auto: true
@@ -12,7 +18,7 @@ const AnswerSchema = new Schema({
     },
 
     question: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Question'
     },
 
@@ -22,5 +28,8 @@ const AnswerSchema = new Schema({
         default: false
     }
 });
+
+
+export type AnswerDocument = HydratedDocument<IAnswer>;
 
 export const Answer = mongoose.model('Answer', AnswerSchema);
