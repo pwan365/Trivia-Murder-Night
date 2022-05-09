@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Project Backend",
-  "main": "Mongoose.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node -r esm Mongoose.js"
+    "start": "node -r esm server.js"
   },
   "author": "",
   "license": "ISC",

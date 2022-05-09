@@ -1,3 +1,9 @@
+/**
+ *
+ * Feel Free to change or add more data to this.
+ *
+ */
+
 export const categories = ["Maths", "Movies", "Anime"];
 
 export const questions = [

@@ -3,9 +3,9 @@ import express from 'express';
 import {categories, questions, answers} from "./example-data";
 
 
-import {Answer} from "./db/Answer.schema";
-import {Question} from "./db/Question.schema";
-import {Category} from "./db/Category.schema";
+import {Answer} from "./schemas/Answer.schema";
+import {Question} from "./schemas/Question.schema";
+import {Category} from "./schemas/Category.schema";
 
 
 const app = express();

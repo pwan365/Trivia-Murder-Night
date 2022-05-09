@@ -1,5 +1,5 @@
 import express from 'express';
-import * as Service from '../../db/Service';
+import * as Service from '../../schemas/Service';
 import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
