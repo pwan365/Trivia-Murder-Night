@@ -2,6 +2,24 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Server and APIs
+
+#### Make sure you have mongodb installed
+
+Go to ``src/backend`` and run ``npm start``
+
+Currently available apis:
+
+````GET http://localhost:4200/api/services/categories````
+
+````GET http://localhost:4200/api/services/questions````
+
+````GET http://localhost:4200/api/services/question````
+
+``src/backend/example-data.js`` include some example questions.
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
