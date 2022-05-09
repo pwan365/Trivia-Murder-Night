@@ -1,29 +1,28 @@
-import mongoose from 'mongoose';
-
 import {Question} from "./Question.schema";
 import {Category} from "./Category.schema";
-import type {QuestionDocument} from "./Question.schema";
-import type {AnswerDocument} from "./Answer.schema";
-import type {CategoryDocument} from "./Category.schema";
 
 
 
-export async function findQuestionById(id: mongoose.Types.ObjectId): Promise<QuestionDocument>{
+export async function findQuestionById(id){
     return await Question.findById(id).exec();
 }
 
-export async function findQuestionByName(name: string): Promise<QuestionDocument>{
+export async function findQuestionByName(name){
     return await Question.findOne({name: name}).exec();
 }
 
-export async function findAnswersOfQuestionById(id: mongoose.Types.ObjectId): Promise<AnswerDocument>{
+export async function findAnswersOfQuestionById(id){
     return await Question.findById(id).populate('answers').exec();
 }
 
-export async function findQuestionsOfCategoryById(id: mongoose.Types.ObjectId): Promise<QuestionDocument>{
+export async function findQuestionsOfCategoryById(id){
     return await Category.findById(id).populate('questions').exec();
 }
 
-export async function findCategories(): Promise<CategoryDocument>{
+export async function findQuestionsOfCategoryByName(name){
+    return await Category.findOne({name: name}).populate('questions').exec();
+}
+
+export async function findCategories(){
     return await Category.find().exec();
 }

@@ -1,16 +1,34 @@
-
 import mongoose from 'mongoose';
-import {Answer} from "./db/Answer.schema";
-import {Question} from "./db/Question.schema";
+import express from 'express';
+
+
+
+// import {Answer} from "./db/Answer.schema";
+// import {Question} from "./db/Question.schema";
 import {Category} from "./db/Category.schema";
 
-app().then(r => {});
 
-async function app(){
+const app = express();
+const port = 4200;
+
+app.use(express.json());
+
+import routes from './routes';
+app.use('/', routes);
+
+conectDb().then(() =>
+        app.listen(
+            port, () => console.log(`App server listening on port ${port}!`)
+        )
+);
+
+async function conectDb(){
     await mongoose.connect('mongodb://localhost:27017/game');
     console.log("Connected");
     await addExampleData();
 }
+
+
 
 async function addExampleData(){
     const categories = ["SE701", "SE750", "SE754"];

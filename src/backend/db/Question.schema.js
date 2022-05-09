@@ -1,12 +1,4 @@
-import mongoose, {HydratedDocument, Schema} from 'mongoose';
-import {ICategory} from "./Category.schema";
-
-export interface IQuestion {
-    _id: Schema.ObjectId;
-    name: string;
-    answers: Schema.Types.ObjectId[];
-    category: Schema.Types.ObjectId;
-}
+import mongoose, {Schema} from 'mongoose';
 
 const QuestionSchema = new Schema({
     _id: {
@@ -30,7 +22,5 @@ const QuestionSchema = new Schema({
         ref: 'Category'
     }
 });
-
-export type QuestionDocument = HydratedDocument<IQuestion>;
 
 export const Question = mongoose.model('Question', QuestionSchema);

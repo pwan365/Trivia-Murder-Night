@@ -1,12 +1,6 @@
-import mongoose, {Schema, HydratedDocument} from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 
-export interface IAnswer {
-    _id: Schema.ObjectId;
-    context: string;
-    question: Schema.Types.ObjectId;
-    correct: boolean;
-}
-const AnswerSchema = new Schema<IAnswer>({
+const AnswerSchema = new Schema({
     _id: {
         type: Schema.ObjectId,
         auto: true
@@ -28,8 +22,5 @@ const AnswerSchema = new Schema<IAnswer>({
         default: false
     }
 });
-
-
-export type AnswerDocument = HydratedDocument<IAnswer>;
 
 export const Answer = mongoose.model('Answer', AnswerSchema);

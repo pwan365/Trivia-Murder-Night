@@ -1,16 +1,21 @@
 import express from 'express';
 import * as Service from '../../db/Service';
+import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
-router.get('/listcategories', (req, res) =>{
-    const categories = Service.findCategories().then(r =>{
-        console.log(r);
-    });
+router.get('/categories', async (req, res) =>{
+    res.status(StatusCodes.OK).json(await Service.findCategories());
 });
 
-router.get('/find', (req, res) =>{
-    const question = Service.findQuestionByName(req.body.name).then(r =>{
-        console.log(r);
-    });
+router.get('/question', async (req, res) =>{
+    const Question = await Service.findQuestionByName(req.body.name);
+    res.status(StatusCodes.OK).json(Question);
 });
+
+router.get('/questions', async (req, res) =>{
+    const questions = await Service.findQuestionsOfCategoryByName(req.body.name);
+    res.status(StatusCodes.OK).json(questions);
+})
+
+export default router;
