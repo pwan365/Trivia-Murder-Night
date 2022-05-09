@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DuckIcon from "../../resources/duck.png";
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowForward } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 let headerButtons = [
@@ -90,18 +90,18 @@ const Header = () => {
         >
           <List>
             <ListItem button>
-              <ArrowBack />
+              <ArrowForward />
             </ListItem>
             <Divider />
             {headerButtons.map((item) => (
-              <ListItem button key={item.title}>
-                <Link
-                  to={item.path}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+              <Link
+                to={item.path}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <ListItem button key={item.title}>
                   <ListItemText primary={item.title} />
-                </Link>
-              </ListItem>
+                </ListItem>
+              </Link>
             ))}
           </List>
         </Box>
