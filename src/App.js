@@ -1,29 +1,29 @@
 import React from "react";
-import './App.scss';
+import "./App.scss";
 
 // components
-import HomeCanvas from './components/HomeCanvas/HomeCanvas';
+import HomeCanvas from "./components/HomeCanvas/HomeCanvas";
 import Header from "./components/Header/Header";
 import HomePara from "./components/HomePara/HomePara";
-import { Container } from "@mui/material";
-import Footer from "./components/Footer/Footer";
-
+import { BrowserRouter } from "react-router-dom";
+import { Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 const App = () => {
-
   return (
     <div id="root">
-      <div style={{height:"100%"}}>
-        <HomeCanvas/>
-        <Container style={{marginBottom:'50px'}} >
+      <div style={{ height: "100%" }}>
+        <HomeCanvas />
+        <BrowserRouter>
           <Header />
-          <HomePara />
-        </Container>
-        <Footer />
-
+          <Routes>
+            <Route exact path="/" element={<HomePara />} />
+            {/* <Route path="/" element={} /> */}
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default App;
