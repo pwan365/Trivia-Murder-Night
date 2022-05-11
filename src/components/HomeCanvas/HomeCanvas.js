@@ -1,9 +1,16 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useRef,useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Stars, TrackballControls, useGLTF } from "@react-three/drei";
 import { Button } from "@mui/material";
+import {StartGame} from '../StartGame/StartGame'
 
 const HomeCanvas = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(prev => !prev);
+  }
+
   const Spin = ({ children, ySpeed, xSpeed }) => {
     const ref = useRef();
     useFrame(() => {
@@ -48,6 +55,7 @@ const HomeCanvas = () => {
         />
         <Html center distanceFactor={10} position={[0, 0.05, 20]}>
           <Button
+            onClick ={openModal}
             variant="contained"
             elevation={10}
             style={{
@@ -58,6 +66,7 @@ const HomeCanvas = () => {
           >
             PLAY!
           </Button>
+          <StartGame showModal={showModal} setShowModal={setShowModal}/>
         </Html>
 
         <Html center distanceFactor={5} position={[0, 0.05, 1]}>
