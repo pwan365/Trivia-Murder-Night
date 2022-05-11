@@ -12,11 +12,6 @@ const AnswerSchema = new Schema({
         default: ""
     },
 
-    question: {
-        type: Schema.Types.ObjectId,
-        ref: 'Question'
-    },
-
     correct: {
         type: Boolean,
         required: true,
