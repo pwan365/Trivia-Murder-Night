@@ -63,8 +63,8 @@ it('gets answers', async () => {
     expect(answersFromDb[1].context).toBe("2");
     expect(answersFromDb[1].correct).toBe(false);
 
-    expect(breakfastsFromDb[2].context).toBe("3");
-    expect(breakfastsFromDb[2].correct).toBe(true);
+    expect(answersFromDb[2].context).toBe("3");
+    expect(answersFromDb[2].correct).toBe(true);
 });
 
 it('gets a single answer', async () => {
