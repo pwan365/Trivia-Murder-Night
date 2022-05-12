@@ -2,9 +2,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const Client = require("socket.io-client");
 
-
-
-
 const playerPosition = {};
 
 describe("my awesome project", () => {
@@ -37,7 +34,7 @@ describe("my awesome project", () => {
         clientSocket.emit("joinRoom", "RoomCode");
         clientSocket.on("errorMessage", (arg) => {
             expect(arg).toBe("Wrong CODE!");
-            done()
+            done();
         })
     });
 
