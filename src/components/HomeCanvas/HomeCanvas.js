@@ -5,11 +5,8 @@ import { Button } from "@mui/material";
 import {StartGame} from '../StartGame/StartGame'
 
 const HomeCanvas = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const openModal = () => {
-    setShowModal(prev => !prev);
-  }
 
   const Spin = ({ children, ySpeed, xSpeed }) => {
     const ref = useRef();
@@ -55,7 +52,7 @@ const HomeCanvas = () => {
         />
         <Html center distanceFactor={10} position={[0, 0.05, 20]}>
           <Button
-            onClick ={openModal}
+            onClick={() => setOpenModal(true)}
             variant="contained"
             elevation={10}
             style={{
@@ -66,7 +63,7 @@ const HomeCanvas = () => {
           >
             PLAY!
           </Button>
-          <StartGame showModal={showModal} setShowModal={setShowModal}/>
+          <StartGame open={openModal} onClose={() => setOpenModal(false)} />
         </Html>
 
         <Html center distanceFactor={5} position={[0, 0.05, 1]}>
