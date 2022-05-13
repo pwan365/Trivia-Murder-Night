@@ -6,9 +6,10 @@ import {categories, questions, answers} from "./example-data";
 import {Answer} from "./schemas/Answer.schema";
 import {Question} from "./schemas/Question.schema";
 import {Category} from "./schemas/Category.schema";
-
+import cors from 'cors';
 
 const app = express();
+app.use(cors({credentials: true, origin: true}));
 const port = 4200;
 
 app.use(express.json());
@@ -24,6 +25,14 @@ conectDb().then(() =>
 
 async function conectDb(){
     await mongoose.connect('mongodb://localhost:27017/game');
+    mongoose.connection.collections['categoryschemas'].drop( function(err) {
+        console.log('categoryschema dropped');
+    });mongoose.connection.collections['answers'].drop( function(err) {
+        console.log('answers dropped');
+    });
+    mongoose.connection.collections['questions'].drop( function(err) {
+        console.log('questions dropped');
+    });
     console.log("Connected");
     await addExampleData();
 }

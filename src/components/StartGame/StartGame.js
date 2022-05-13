@@ -1,7 +1,18 @@
 import React from 'react'
 
+max_players = 8;
+max_rounds = 4;
+
+async function getCategories() {
+fetch('http://localhost:4200/api/services/categories')
+.then(response => response.json())
+.then(data => console.log(data));
+}
+
+
 export const StartGame = ({open,onClose}) => {
     if (!open) return null;
+    getCategories();
     return (
         <>
          <div onClick={onClose} className='overlay'>
@@ -20,21 +31,47 @@ export const StartGame = ({open,onClose}) => {
                     <h3>Create Game</h3>
                     <div class="listbox-area">
                     <div>
-                        <span id="ss_elem" class="listbox-label">
+                        <span>
                         Select a Category:
                         </span>
-                        <ul id="ss_elem_list"
-                            tabindex="0"
-                            role="listbox"
-                            aria-labelledby="ss_elem">
-                        <li id="ss_elem_Np" role="option">
+                        <ul>
+                        <li>
                             Maths
                         </li>
-                        <li id="ss_elem_Pu" role="option">
+                        <li>
                             Astronomy
                         </li>
                         </ul>
                     </div>
+
+                    <div>
+                        <span>
+                        Number of Players:
+                        </span>
+                        <ul>
+                        <li>
+                            Maths
+                        </li>
+                        <li>
+                            Astronomy
+                        </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span>
+                        Number of Rounds:
+                        </span>
+                        <ul>
+                        <li>
+                            Maths
+                        </li>
+                        <li>
+                            Astronomy
+                        </li>
+                        </ul>
+                    </div>
+
                     </div>
                     <button>Start Game!</button>
                  </div>
@@ -44,7 +81,6 @@ export const StartGame = ({open,onClose}) => {
                     <input></input>
                     <button>Join!</button>
                  </div>
-               
              </div>
            </div>
          </div>
