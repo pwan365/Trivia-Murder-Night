@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.modalContainer {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  background-color: #1b1b1b;
+  color: white;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+}
+
+.closeBtn {
+  position: fixed;
+  right: 12px;
+  cursor: pointer; 
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+}
+
+.content * {
+  font-family: 'Segoe UI';
+}
+
+.joinGame {
+  display:flex;
+  flex-direction:column;
+}
+
+.button {
+  margin-top: 10px;
+  background-color: hotpink;
+  font-family: 'Segoe UI';
+  border-radius: 5px;
+  border-color: transparent;
+  cursor: pointer;
+  color: white;
+}
+
+.dropDown {
+  margin-top: 7px;
+}
+
+
+
