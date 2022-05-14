@@ -28,6 +28,7 @@ code {
   position: fixed;
   right: 12px;
   cursor: pointer; 
+  justify-content: center;
 }
 
 .content {
@@ -35,8 +36,32 @@ code {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem 2rem;
+}
+
+.content * {
+  font-family: 'Segoe UI';
+}
+
+.joinGame {
+  display:flex;
+  flex-direction:column;
+}
+
+.button {
+  margin-top: 10px;
+  background-color: hotpink;
+  font-family: 'Segoe UI';
+  border-radius: 5px;
+  border-color: transparent;
+  cursor: pointer;
+  color: white;
+}
+
+.dropDown {
+  margin-top: 7px;
 }
 
 

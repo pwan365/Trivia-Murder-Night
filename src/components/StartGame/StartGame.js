@@ -17,7 +17,6 @@ export const StartGame = ({open,onClose}) => {
     }, []);
 
     if (!open) return null;
-    console.log(category);
     return (
         <>
          <div onClick={onClose} className='overlay'>
@@ -37,17 +36,16 @@ export const StartGame = ({open,onClose}) => {
                     <h3>Create Game</h3>
 
                     <label>Select a Category:</label>
-                    <select name = "categories">
-                        {category.map(c => {
+                    <select className="dropDown" name = "category">
+                        {category.map(c => (
                             <option>{c.name}</option>
-                            console.log(c.name);
-                        })}
+                        ))}
                     </select>
                     <hr></hr>
 
                     <label>Select Number of Players:</label>
                     <br></br>
-                    <select>
+                    <select className="dropDown" name = "player">
                         {players.map(player => (
                             <option>{player}</option>
                         ))}
@@ -57,21 +55,20 @@ export const StartGame = ({open,onClose}) => {
 
                     <label>Choose Number of Rounds:</label>
                     <br></br>
-                    <select>
+                    <select className="dropDown" name = "round">
                     {rounds.map(round => (
                             <option>{round}</option>
                         ))}
                     </select>
-
-                    <hr></hr>
-
-                    <button>Start Game!</button>
+                    <br></br>
+                    <button className="button">Start Game!</button>
                     </div>
-                 <div className='joinGame'>
-                    <h3>Join Game</h3>
-                    <p>Enter Code:</p>
-                    <input></input>
-                    <button>Join!</button>
+
+                    <div className='joinGame'>
+                        <h3>Join Game</h3>
+                        <p>Enter Code:</p>
+                        <input></input>
+                        <button className="button">Join!</button>
                     </div>
                 </div>
              </div>
