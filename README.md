@@ -29,7 +29,13 @@ The application will start at http://localhost:3000/
 
 ### Testing
 
-`` npm run test ``
+#### Testing frontend
+
+`` npm run test-frontend ``
+
+#### Testing backend
+
+`` npm run test-backend ``
 
 
 ## How to play locally:
