@@ -1,80 +1,120 @@
-import { CategoryTwoTone } from '@mui/icons-material';
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState, useContext } from "react";
+import { SocketContext } from "../../context/socket";
+import { useNavigate } from "react-router-dom";
 
+const players = [2, 3, 4, 5, 6, 7, 8];
+var rounds = [1, 2, 3, 4, 5, 6, 7, 8];
 
-const players = [2,3,4,5,6,7,8]
-var rounds = [1,2,3,4];
+export const StartGame = () => {
+  const [category, setCategory] = useState([]);
+  const socket = useContext(SocketContext);
+  let navigate = useNavigate();
 
-export const StartGame = ({open,onClose}) => {
-    const [category, setCategory] = useState([]);
+  const [RC, setRC] = useState("");
 
-    useEffect(() => {
-        async function getCategories() {
-            const response = await fetch('http://localhost:4200/api/services/categories').then((resp) =>  resp.json());
-            setCategory(response);
-        }
+  const joinRoom = () => {
+    socket.emit("joinRoom", RC);
+  };
+
+  const createNewRoom = () => {
+    var category = document.getElementById("categorySelect");
+    var player = document.getElementById("playerSelect");
+    var round = document.getElementById("roundSelect");
+
+    socket.emit("newRoom", {
+      numberOfPlayer: parseInt(player.options[player.selectedIndex].value),
+      numberOfRounds: parseInt(round.options[round.selectedIndex].value),
+      category: category.options[category.selectedIndex].value,
+    });
+  };
+
+  const updateRoomCode = (event) => {
+    event.preventDefault();
+    setRC(event.target.value);
+  };
+
+  useEffect(() => {
+    async function getCategories() {
+      const response = await fetch(
+        "http://localhost:4200/api/services/categories"
+      ).then((resp) => resp.json());
+      setCategory(response);
+    }
     getCategories();
-    }, []);
+  }, []);
 
-    if (!open) return null;
-    return (
-        <>
-         <div onClick={onClose} className='overlay'>
-         <div
-           onClick={(e) => {
-             e.stopPropagation();
-           }}
-           className='modalContainer'
-         >
-           <div className='modalRight'>
-             <p className='closeBtn' onClick={onClose}>
-               X
-             </p>
-             <div className='content'>
-                 <div className='createGame'>
-                     
-                    <h3>Create Game</h3>
+  socket.on("confirm", (roomDetail) => {
+    navigate(`/gameRoom`, { state: roomDetail });
+  });
 
-                    <label>Select a Category:</label>
-                    <select className="dropDown" name = "category">
-                        {category.map(c => (
-                            <option>{c.name}</option>
-                        ))}
-                    </select>
-                    <hr></hr>
+  socket.on("roomCode", (roomCode) => {
+    navigate(`/gameRoom`, { state: roomCode });
+  });
 
-                    <label>Select Number of Players:</label>
-                    <br></br>
-                    <select className="dropDown" name = "player">
-                        {players.map(player => (
-                            <option>{player}</option>
-                        ))}
-                    </select>
+  return (
+    <>
+      <div className="overlay">
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="modalContainer"
+        >
+          <div className="modalRight">
+            <p className="closeBtn" onClick={() => navigate("/")}>
+              X
+            </p>
+            <div className="content" style={{ maxWidth: "80vw" }}>
+              <div className="createGame">
+                <h3 className="banner">Create Game</h3>
 
-                    <hr></hr>
+                <label>Select a Category:</label>
+                <select
+                  className="dropDown"
+                  name="category"
+                  id="categorySelect"
+                >
+                  {category.map((c) => (
+                    <option>{c.name}</option>
+                  ))}
+                </select>
+                <hr></hr>
 
-                    <label>Choose Number of Rounds:</label>
-                    <br></br>
-                    <select className="dropDown" name = "round">
-                    {rounds.map(round => (
-                            <option>{round}</option>
-                        ))}
-                    </select>
-                    <br></br>
-                    <button className="button">Start Game!</button>
-                    </div>
+                <label>Select Number of Players:</label>
+                <br></br>
+                <select className="dropDown" name="player" id="playerSelect">
+                  {players.map((player) => (
+                    <option>{player}</option>
+                  ))}
+                </select>
 
-                    <div className='joinGame'>
-                        <h3>Join Game</h3>
-                        <p>Enter Code:</p>
-                        <input></input>
-                        <button className="button">Join!</button>
-                    </div>
-                </div>
-             </div>
-           </div>
-         </div>
-        </>
-    )
-}
+                <hr></hr>
 
+                <label>Choose Number of Rounds:</label>
+                <br></br>
+                <select className="dropDown" name="round" id="roundSelect">
+                  {rounds.map((round) => (
+                    <option>{round}</option>
+                  ))}
+                </select>
+                <br></br>
+                <button className="button" onClick={createNewRoom}>
+                  Start Game!
+                </button>
+              </div>
+
+              <div className="joinGame">
+                <h3>Join Game</h3>
+                <p>Enter Code:</p>
+                <input value={RC} onChange={updateRoomCode}></input>
+                <button className="button" onClick={joinRoom}>
+                  Join!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};

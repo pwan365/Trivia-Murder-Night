@@ -1,5 +1,7 @@
+import { Grid } from "@mui/material";
 import React from "react";
 import DuckIcon from "../../resources/duck.png";
+import GhostIcon from "../../resources/ghost.png";
 
 const RacingTrack = (props) => {
   return (
@@ -16,23 +18,29 @@ const RacingTrack = (props) => {
                 style={{
                   width: "100%",
                   display: "grid",
-                  gridTemplateColumns: `repeat(10, 1fr)`,
-                  transition: "all 2s ease",
+                  gridTemplateColumns: `repeat(${props.numberOfRounds}, 1fr)`,
                 }}
               >
                 {props.ghostPos !== 0 && (
-                  <div
+                  <Grid
                     className="position-ghost"
                     style={{
                       gridColumnStart: props.ghostPos,
-                      transition: "all 2s ease",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <p>Ghost</p>
-                  </div>
+                    <img
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        fill: "white",
+                      }}
+                      src={GhostIcon}
+                      alt="ghost"
+                    />
+                  </Grid>
                 )}
                 <div
                   className="position-player"
@@ -50,7 +58,7 @@ const RacingTrack = (props) => {
                       transition: "all 2s ease",
                     }}
                     src={DuckIcon}
-                    alt="logo"
+                    alt="duck"
                   />
                 </div>
                 <p

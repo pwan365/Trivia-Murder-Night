@@ -1,95 +1,62 @@
-# Getting Started with Create React App
+## Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Trivia Murder Night is a learning tool players can choose a selected topic and compete against each other to see who has the best knowledge. 
 
-## Routing
+## Setup
 
-Go to prroject root folder and run ``npm install react-router-dom``
+### Prerequisite
 
-## Server and APIs
+Make sure you have Node.js v17 +
 
-#### Make sure you have mongodb installed
+### Install dependencies
 
-Go to ``src/backend`` and run ``npm start``
+At the root directory, run
 
-Currently available apis:
+``npm install``
 
-````GET http://localhost:4200/api/services/categories````
+### Start the application
 
-````GET http://localhost:4200/api/services/questions````
+If you are using unix operating system, please run 
 
-````GET http://localhost:4200/api/services/question````
+`` npm run start-unix ``
 
-``src/backend/example-data.js`` include some example questions.
+If you are using Windows or other, please run  
+
+```` npm run start-prod ````
+
+The application will start at http://localhost:3000/
 
 
-## Available Scripts
+### Testing
 
-In the project directory, you can run:
+`` npm run test ``
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to play locally:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Once opens a room, you need to add multiple other tabs to join the room by input the room code to play. 
 
-### `npm test`
+## Features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Multiplayer game, where the player count is 2 - 8
+- Quiz with MCQ questions based on a selected topic with timer. 
+- A ghost will chase the user starting at a specific round. 
+- Room system which allows the users to create and join a room with their partners who learn/play the game together. 
+- A user-friendly UI/UX to engage potential users.
+- A tutorial section to help players learn the rules of the game.
 
-### `npm run build`
+## Meeting minutes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Please see [wiki](https://github.com/UOA-CS732-SE750-Students-2022/project-group-dandelion-ducks/wiki) for more detail.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stacks used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[MongoDB](https://www.mongodb.com/)
 
-### `npm run eject`
+[Express](https://expressjs.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[ReactJS](https://reactjs.org/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Node](https://nodejs.org/en/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## Routing
-
-Go to prroject root folder and run ``npm install react-router-dom``
+[Socket.io](https://socket.io/)

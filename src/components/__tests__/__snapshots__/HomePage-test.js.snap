@@ -104,6 +104,7 @@ exports[`snapshot 2`] = `
         type="button"
       >
         <img
+          alt="logo"
           src="duck.png"
           style={
             Object {

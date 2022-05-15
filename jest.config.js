@@ -2,6 +2,6 @@ module.exports = {
     testRunner: 'jest-jasmine2',
     testEnvironment: 'node',
     roots: [
-        './test'
+        'src/backend/test'
     ]
 }

@@ -12,6 +12,9 @@ import { SocketContext, socket } from "./context/socket";
 import GameRoom from "./components/GameRoom/GameRoom";
 import GamePage from "./components/GamePage/GamePage";
 import GameEnd from "./components/GameEnd/GameEnd";
+import { StartGame } from "./components/StartGame/StartGame";
+import WarningBar from "./components/WarningBar/WarningBar";
+import BackDrop from "./components/BackDrop/BackDrop";
 
 const App = () => {
   return (
@@ -22,12 +25,15 @@ const App = () => {
             <Header />
             <Routes>
               <Route exact path="/" element={<HomeCanvas />} />
+              <Route path="/createGame" element={<StartGame />} />
               <Route path="/tutorial" element={<Tutorial />} />
               <Route path="/gameRoom" element={<GameRoom />} />
               <Route path="/game" element={<GamePage />} />
               <Route path="/gameEnd" element={<GameEnd />} />
               <Route path="*" element={<p>404 not found</p>} />
             </Routes>
+            <WarningBar />
+            <BackDrop />
           </BrowserRouter>
         </SocketContext.Provider>
       </div>

@@ -6,21 +6,20 @@ import { Answer } from "./schemas/Answer.schema";
 import { Question } from "./schemas/Question.schema";
 import { Category } from "./schemas/Category.schema";
 import * as Service from "./schemas/Service";
-import cors from 'cors';
+import cors from "cors";
+import routes from "./routes";
 
 const app = express();
-app.use(cors({credentials: true, origin: true}));
+app.use(cors({ credentials: true, origin: true }));
 const port = 4200;
 
-// app.use(express.json());
+app.use(express.json());
 
-// import routes from './routes';
-// app.use('/', routes);
+app.use("/", routes);
 
 connectDb().then(() =>
   app.listen(port, () => console.log(`App server listening on port ${port}!`))
 );
-
 
 function makeid(length) {
   var result = "";
@@ -31,25 +30,16 @@ function makeid(length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-
-async function connectDb(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/game");
-    mongoose.connection.collections['categoryschemas'].drop( function(err) {
-        console.log('categoryschema dropped');
-    });mongoose.connection.collections['answers'].drop( function(err) {
-        console.log('answers dropped');
-    });
-    mongoose.connection.collections['questions'].drop( function(err) {
-        console.log('questions dropped');
-    });
-    mongoose.connection.collections['programs'].drop( function(err) {
-        console.log('programs dropped');
-    });
-    console.log("Connected");
-    await addExampleData();
 }
-  
-  
+async function connectDb() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/game");
+  mongoose.connection.collections["categoryschemas"].drop(function (err) {});
+  mongoose.connection.collections["answers"].drop(function (err) {});
+  mongoose.connection.collections["questions"].drop(function (err) {});
+  console.log("Connected");
+  await addExampleData();
+}
+
 async function addExampleData() {
   for (let i = 0; i < categories.length; i++) {
     let ques = [];
@@ -109,12 +99,9 @@ io.on("connection", (socket) => {
         socket.emit("errorMessage", "This game is full!!");
         return;
       }
-
-      socket.join(RC);
       pushPlayer(RC);
-      // state[socket.id] = [RC, 0];
+      socket.join(RC);
       console.log("socket " + socket.id + " joined room " + RC);
-      // rooms[RC].players.push(socket.id);
       io.sockets.in(RC).emit("newComer", rooms[RC]);
       socket.emit("confirm", rooms[RC]);
     } else {
@@ -123,57 +110,73 @@ io.on("connection", (socket) => {
   }
 
   function handleDisconnect(reason) {
-    console.log(reason);
+    Object.entries(rooms).forEach(([key, value]) => {
+      if (socket.id in value.players) {
+        socket.leave(key);
+        delete value.players[socket.id];
+        rooms[key].playerCount--;
+        if (rooms[key].playerCount === 0) {
+          delete rooms[key];
+        }
+        if (value.started) {
+          io.sockets.in(key).emit("gameDisconnect");
+          socket.emit("errorMessage", "Disconnected from a session");
+        }
+        console.log(value);
+
+        io.sockets.in(key).emit("newComer", value); // inform the lobby
+      }
+    });
   }
 
   function handlePlayerFinished(result, RC) {
+    console.log(rooms[RC]);
     if (result) rooms[RC].players[socket.id].position++;
     rooms[RC].numberOfDone++;
-    if (
-      rooms[RC].players[socket.id].alive &&
-      rooms[RC].players[socket.id].position <= rooms[RC].ghostRound &&
-      rooms[RC].ghostRound != 0
-    ) {
-      rooms[RC].players[socket.id].alive = false;
-        socket.emit("youDied");
-        console.log("someone died");
-    }
+
     if (rooms[RC].numberOfDone === rooms[RC].numberOfPlayer) {
-      //console.log("Round Finished");
       rooms[RC].numberOfDone = 0;
       rooms[RC].currentRound++;
 
+      var ghostPos = rooms[RC].currentRound - rooms[RC].numberOfRounds / 2;
+      if (ghostPos > 0) {
+        rooms[RC].ghostRound = ghostPos;
+      }
+      io.to(RC).emit("ghostPos", rooms[RC].ghostRound);
+
       var wonPlayers = [];
+      var liveCount = 0;
 
-    var wonPlayers = [];
-    var liveCount = 0;
-
-    Object.entries(rooms[RC].players).map(([id, player]) => {
+      Object.entries(rooms[RC].players).map(([id, player]) => {
+        if (
+          player.alive &&
+          player.position <= rooms[RC].ghostRound - 1 &&
+          rooms[RC].ghostRound !== 0
+        ) {
+          player.alive = false;
+          io.to(id).emit("youDied");
+          console.log("someone died");
+        }
         if (player.position == rooms[RC].numberOfRounds) {
           wonPlayers.push(player);
         }
         if (player.alive) {
-            liveCount++;
+          liveCount++;
         }
-    });
-
-    console.log(rooms[RC].currentRound);
-        console.log(rooms[RC].players);
-        console.log("ghost at " +rooms[RC].ghostRound);
-    
-
-        if (liveCount == 0) {
-            io.sockets.in(RC).emit("gameFinished", []);
-        }else if (wonPlayers.length != 0) {
-            io.sockets.in(RC).emit("gameFinished", wonPlayers);
-        } else {
-            io.sockets.in(RC).emit("roundFinished", rooms[RC].players);
-        }
+      });
+      if (liveCount == 0) {
+        io.sockets.in(RC).emit("gameFinished", []);
+      } else if (wonPlayers.length != 0) {
+        io.sockets.in(RC).emit("gameFinished", wonPlayers);
+      } else {
+        io.sockets.in(RC).emit("roundFinished", rooms[RC].players);
+      }
     }
   }
 
   function handleRestart(RC) {
     cleanRoom(RC);
+
     io.sockets.in(RC).emit("clientRestart", rooms[RC]);
   }
 
@@ -189,21 +192,9 @@ io.on("connection", (socket) => {
   }
 
   async function handleNewGame(RC) {
-    /*
-    let newPlayerLocations = {};
-    let newPlayerLive = {};
-    for (let player of rooms[RC].players) {
-      newPlayerLocations[player.id] = 0;
-      newPlayerLive[player.id] = true;
-    }
-    playerPosition[RC] = newPlayerLocations;
-    playerLive[RC] = newPlayerLive;
-    */
     let quest = await getQuest(RC);
-    //console.log("nnnnnnnnnnnnnnnnn");
-    //console.log(newPlayerLocations);
-    //console.log(playerPosition[0]);
-    io.sockets.in(RC).emit("startGame", rooms[RC].players, quest); // SEND NEW QUESTION AS THE SECOND OBJECT
+    rooms[RC].started = true;
+    io.sockets.in(RC).emit("startGame", rooms[RC].players, quest);
   }
 
   async function handleNewRound(RC) {
@@ -212,12 +203,7 @@ io.on("connection", (socket) => {
     if (rooms[RC].numberOfDone === rooms[RC].numberOfPlayer) {
       rooms[RC].numberOfDone = 0;
       let quest = await getQuest(RC);
-      io.sockets.in(RC).emit("startRound", quest); // SEND NEW QUESTION AS THE SECOND OBJECT
-
-      if (rooms[RC].currentRound > rooms[RC].numberOfRounds / 2) {
-        rooms[RC].ghostRound += 1;
-        io.to(RC).emit("ghostPos", rooms[RC].ghostRound);
-      }
+      io.sockets.in(RC).emit("startRound", quest);
     }
   }
 
@@ -229,15 +215,14 @@ io.on("connection", (socket) => {
       answeredQuestions: [],
       players: {},
       playerCount: 0,
-      owner: socket.id,
+      owner: socket.id.toString(),
       category: roomConfig.category,
       code: code,
       numberOfDone: 0,
       currentRound: 1,
       ghostRound: 0,
+      started: false,
     };
-    //console.log(code);
-    //console.log(rooms[code]);
     pushPlayer(code);
     socket.join(code);
     socket.emit("roomCode", rooms[code]);
@@ -249,13 +234,11 @@ io.on("connection", (socket) => {
       question = await Service.findRandomQuestionOfCategory(rooms[RC].category);
       id = question._id.toString();
       if (!rooms[RC].answeredQuestions.includes(id)) {
-        // uncomment when there is more question
-        //rooms[roomID].answeredQuestions.push(id);
         break;
       }
     }
+    rooms[RC].answeredQuestions.push(id);
     return question;
-    //io.to(roomID).emit("quest", question);
   }
 
   function pushPlayer(RC) {
@@ -271,7 +254,7 @@ io.on("connection", (socket) => {
     for (var count in rooms[RC].players) {
       length++;
     }
-    player.id = socket.id;
+    player.id = socket.id.toString();
     player.playerName = "player" + length.toString();
     rooms[RC].players[player.id] = player;
     rooms[RC].playerCount++;

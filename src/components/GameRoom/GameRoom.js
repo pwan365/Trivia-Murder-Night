@@ -12,7 +12,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { SocketContext } from "../../context/socket";
@@ -43,9 +43,18 @@ const GameRoom = () => {
     });
   });
 
-  console.log(state);
+  useEffect(() => {
+    let playerArray = Object.entries(detail.players).filter(
+      ([key, value]) => value.id === socket.id
+    );
+
+    if (playerArray.length < 1) {
+      navigate("/");
+    }
+  }, [detail.players, navigate, socket.id]);
+
   return (
-    <Container style={{ marginTop: "100px", color: "white" }}>
+    <Container style={{ paddingTop: "100px", color: "white" }}>
       <Grid>
         <Card
           style={{
@@ -54,10 +63,24 @@ const GameRoom = () => {
             justifyContent: "space-around",
           }}
         >
-          <Typography variant="h5">Room: {detail.code}</Typography>
-          <Typography variant="h5">Player: {detail.numberOfPlayer}</Typography>
-          <Typography variant="h5">Rounds: {detail.numberOfRounds}</Typography>
-          <Typography variant="h5">Category: {detail.category}</Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <Typography variant="h6">Room: {detail.code}</Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6">
+                Player: {detail.numberOfPlayer}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6">
+                Rounds: {detail.numberOfRounds}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6">Category: {detail.category}</Typography>
+            </Grid>
+          </Grid>
         </Card>
         <Card>
           <CardContent elevation={10}>

@@ -1,11 +1,6 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: #252425;
-  transition: 0.4s ease-in-out;
 }
 
 html,
@@ -20,12 +15,12 @@ body,
 .container {
   margin: 0 auto;
   width: 100%;
-  max-width: 100%;
-  height: 90vh;
-  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  max-width: 100%;
+  height: 90vh;
+  display: flex;
 }
 
 .title {
@@ -41,13 +36,12 @@ body,
 }
 
 .tutorial-title {
-  font-size: 6rem;
+  font-size: 2rem;
   text-align: center;
   width: 100%;
   margin: 0 auto;
   color: #fff;
   padding-top: 100px;
-  padding-bottom: 70px;
 }
 
 .tutorial-text {
@@ -83,4 +77,15 @@ body,
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner {
+  background-image: url("../src/resources/banner.png");
+  background-repeat: no-repeat;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

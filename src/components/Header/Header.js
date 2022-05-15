@@ -17,7 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DuckIcon from "../../resources/duck.png";
 import { ArrowForward } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 let headerButtons = [
   {
@@ -31,16 +31,27 @@ let headerButtons = [
 ];
 
 const Header = () => {
+  const location = useLocation();
   const [toggleSideMenu, setToggleSideMenu] = useState(false);
 
   const toggleMenu = () => {
     setToggleSideMenu(!toggleSideMenu);
   };
 
+  console.log(location.pathname);
+
+  if (location.pathname !== "/" && location.pathname !== "/tutorial")
+    return null;
   return (
     <div>
       <AppBar
-        style={{ background: "transparent", color: "white" }}
+        style={{
+          position: "absolute",
+          left: "0",
+          top: "0",
+          background: "#252425",
+          color: "white",
+        }}
         elevation={0}
       >
         <Toolbar

@@ -29,7 +29,7 @@ const style = {
 
 const GamePage = () => {
   const { state } = useLocation();
-  const { player, question, roomCode } = state;
+  const { player, question, roomCode, numberOfRounds } = state;
   const socket = useContext(SocketContext);
   let navigate = useNavigate();
 
@@ -40,6 +40,12 @@ const GamePage = () => {
   const [loading, setLoading] = useState(false);
   const [secs, setSeconds] = useState(10);
   const [ghostPos, setGhostPos] = useState(0);
+
+  useEffect(() => {
+    if (!(socket.id in playerStatus)) {
+      navigate("/");
+    }
+  }, [navigate, playerStatus, playerStatus.id, socket.id]);
 
   useEffect(() => {
     let sampleInterval = setInterval(() => {
@@ -97,6 +103,8 @@ const GamePage = () => {
     navigate("/gameEnd", {
       state: {
         winners: winners,
+        roomCode: roomCode,
+        players: playerStatus,
       },
     });
   });
@@ -105,11 +113,19 @@ const GamePage = () => {
     setGhostPos(ghostPosition);
   });
 
+  socket.on("gameDisconnect", () => {
+    navigate("/");
+  });
+
   return (
-    <div>
-      <Container style={{ marginTop: "100px", color: "white" }}>
+    <div style={{ height: "fit-content" }}>
+      <Container style={{ marginTop: "64px", color: "white" }}>
         <Grid>
-          <RacingTrack playerStatus={playerStatus} ghostPos={ghostPos} />
+          <RacingTrack
+            playerStatus={playerStatus}
+            ghostPos={ghostPos}
+            numberOfRounds={numberOfRounds}
+          />
           <div
             style={{
               color: "white",
@@ -140,7 +156,7 @@ const GamePage = () => {
               </Typography>
             </CardContent>
           </Card>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} style={{ marginBottom: "24px" }}>
             {quiz.answers.map((answer) => {
               return (
                 <Grid item xs={6}>
