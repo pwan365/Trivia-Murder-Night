@@ -45,9 +45,9 @@
     "client": "react-scripts start",
     "server": "node -r esm src/backend/server.js",
     "start-unix": "npm run server & npm run client",
-    "start-prod":"concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start-prod": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "build": "react-scripts build",
-    "test-frontend": "react-scripts test --testPathIgnorePatterns=src/backend/test",
+    "test-frontend": "react-scripts test --testPathIgnorePatterns=src/backend/test --watchAll=false",
     "test-backend": "jest",
     "test": "npm run test-backend & npm run test-frontend",
     "eject": "react-scripts eject"
