@@ -38,8 +38,6 @@ const Header = () => {
     setToggleSideMenu(!toggleSideMenu);
   };
 
-  console.log(location.pathname);
-
   if (location.pathname !== "/" && location.pathname !== "/tutorial")
     return null;
   return (
