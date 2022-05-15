@@ -138,7 +138,9 @@ io.on("connection", (socket) => {
       rooms[RC].numberOfDone = 0;
       rooms[RC].currentRound++;
 
-      var ghostPos = rooms[RC].currentRound - rooms[RC].numberOfRounds / 2;
+      var ghostPos = parseInt(
+        rooms[RC].currentRound - rooms[RC].numberOfRounds / 2
+      );
       if (ghostPos > 0) {
         rooms[RC].ghostRound = ghostPos;
       }
