@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  >
+    <p
+      style={
+        Object {
+          "marginRight": "10px",
+          "width": "100px",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      DIED
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  >
+    <p
+      style={
+        Object {
+          "marginRight": "10px",
+          "width": "100px",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      DIED
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  >
+    <p
+      style={
+        Object {
+          "marginRight": "10px",
+          "width": "100px",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      DIED
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  >
+    <p
+      style={
+        Object {
+          "marginRight": "10px",
+          "width": "100px",
+        }
+      }
+    />
+    <p
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      DIED
+    </p>
+  </div>
+</div>
+`;
