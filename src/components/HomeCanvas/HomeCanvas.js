@@ -1,13 +1,15 @@
-import React, { Suspense, useRef,useState } from "react";
+import React, { Suspense, useRef, useState, useContext } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Stars, TrackballControls, useGLTF } from "@react-three/drei";
-import { Button } from "@mui/material";
-import {StartGame} from '../StartGame/StartGame'
-
+import { Button, TextField } from "@mui/material";
+import { SocketContext } from "../../context/socket";
+import { useNavigate } from "react-router-dom";
+import {StartGame} from '../StartGame/StartGame';
 const HomeCanvas = () => {
+  const socket = useContext(SocketContext);
+  let navigate = useNavigate();
+
   const [openModal, setOpenModal] = useState(false);
-
-
   const Spin = ({ children, ySpeed, xSpeed }) => {
     const ref = useRef();
     useFrame(() => {
@@ -25,6 +27,33 @@ const HomeCanvas = () => {
       </Suspense>
     );
   };
+
+  const [RC, setRC] = useState("");
+
+  const updateRoomCode = (event) => {
+    event.preventDefault();
+    setRC(event.target.value);
+  };
+
+  const createNewRoom = () => {
+    socket.emit("newRoom", {
+      numberOfPlayer: 2,
+      numberOfRounds: 5,
+      category: "Maths",
+    });
+  };
+
+  const joinRoom = () => {
+    socket.emit("joinRoom", RC);
+  };
+
+  socket.on("confirm", (roomDetail) => {
+    navigate(`/gameRoom`, { state: roomDetail });
+  });
+
+  socket.on("roomCode", (roomCode) => {
+    navigate(`/gameRoom`, { state: roomCode });
+  });
 
   return (
     <div
@@ -51,6 +80,12 @@ const HomeCanvas = () => {
           maxDistance={25}
         />
         <Html center distanceFactor={10} position={[0, 0.05, 20]}>
+          <TextField
+            label="Room Code"
+            variant="outlined"
+            value={RC}
+            onChange={updateRoomCode}
+          />
           <Button
             onClick={() => setOpenModal(true)}
             variant="contained"
@@ -60,6 +95,21 @@ const HomeCanvas = () => {
               width: "200px",
               height: "50px",
             }}
+          >
+            PLAY!
+          </Button>
+          <Button
+            variant="contained"
+            elevation={10}
+            style={{
+              background: "hotpink",
+              width: "200px",
+              height: "50px",
+            }}
+            onClick={createNewRoom}
+          >
+            New room
+          </Button>
           >
             PLAY!
           </Button>
@@ -85,7 +135,9 @@ const HomeCanvas = () => {
         </Html>
 
         <Spin xSpeed={0.0001} ySpeed={0.0001}>
-          <Stars />
+          <Suspense>
+            <Stars />
+          </Suspense>
         </Spin>
       </Canvas>
     </div>

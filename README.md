@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Routing
+
+Go to prroject root folder and run ``npm install react-router-dom``
+
 ## Server and APIs
 
 #### Make sure you have mongodb installed
@@ -17,7 +21,6 @@ Currently available apis:
 ````GET http://localhost:4200/api/services/question````
 
 ``src/backend/example-data.js`` include some example questions.
-
 
 
 ## Available Scripts
@@ -86,3 +89,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Routing
+
+Go to prroject root folder and run ``npm install react-router-dom``

@@ -50,7 +50,7 @@ const Header = () => {
           }}
         >
           <IconButton>
-            <img style={{ width: "40px" }} src={DuckIcon} />
+            <img style={{ width: "40px" }} src={DuckIcon} alt="logo" />
           </IconButton>
 
           <Hidden mdDown>

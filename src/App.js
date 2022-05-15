@@ -3,22 +3,33 @@ import "./App.scss";
 
 // components
 import HomeCanvas from "./components/HomeCanvas/HomeCanvas";
+import Tutorial from "./components/Tutorial/Tutorial";
 import Header from "./components/Header/Header";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
+import { SocketContext, socket } from "./context/socket";
+import GameRoom from "./components/GameRoom/GameRoom";
+import GamePage from "./components/GamePage/GamePage";
+import GameEnd from "./components/GameEnd/GameEnd";
 
 const App = () => {
   return (
     <div id="root">
       <div style={{ height: "100%" }}>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route exact path="/" element={<HomeCanvas />} />
-            {/* <Route path="/" element={} /> */}
-          </Routes>
-        </BrowserRouter>
+        <SocketContext.Provider value={socket}>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route exact path="/" element={<HomeCanvas />} />
+              <Route path="/tutorial" element={<Tutorial />} />
+              <Route path="/gameRoom" element={<GameRoom />} />
+              <Route path="/game" element={<GamePage />} />
+              <Route path="/gameEnd" element={<GameEnd />} />
+              <Route path="*" element={<p>404 not found</p>} />
+            </Routes>
+          </BrowserRouter>
+        </SocketContext.Provider>
       </div>
     </div>
   );
