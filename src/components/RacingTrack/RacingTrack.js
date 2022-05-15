@@ -8,7 +8,7 @@ const RacingTrack = (props) => {
     <div>
       {Object.entries(props.playerStatus).map(([key, value]) => {
         return (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }} key={key}>
             <p style={{ marginRight: "10px", width: "100px" }}>
               {value.playerName}
             </p>

@@ -1,108 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`snapshot 1`] = `
-<div>
-  <h1
-    className="MuiTypography-root MuiTypography-h1 tutorial-title css-o2w69a-MuiTypography-root"
-  >
-    How to play the game?
-  </h1>
-  <div
-    className="tut-flex"
-  >
-    <div
-      className="tutorial-container"
-    >
-      <h4
-        className="MuiTypography-root MuiTypography-h4 tutorial-text css-5lbw0b-MuiTypography-root"
-      >
-        To join a game:
-      </h4>
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Scroll down in the home page to reveal the button
-      </h5>
-      <img
-        className="tutorial-img"
-        src="img1.png"
-      />
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Enter a room code to join a lobby
-      </h5>
-      <img
-        className="tutorial-img"
-        src="img2.png"
-      />
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Wait for the host to start the game
-      </h5>
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Progress the game by answering the questions
-      </h5>
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Try not to fall behind, if the ghost catches up to you, you're dead
-      </h5>
-      <img
-        className="tutorial-img"
-        src="img3.png"
-      />
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Win the game by being the first to cross the line
-      </h5>
-    </div>
-    <div
-      className="tutorial-container"
-    >
-      <h4
-        className="MuiTypography-root MuiTypography-h4 tutorial-text css-5lbw0b-MuiTypography-root"
-      >
-        To host a game:
-      </h4>
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Click "New Room" from the home page
-      </h5>
-      <img
-        className="tutorial-img"
-        src="img10.png"
-      />
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Select the number of players, rounds, and a category of questions to play for
-      </h5>
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Share the room code with your friends for them to join
-      </h5>
-      <img
-        className="tutorial-img"
-        src="img11.png"
-      />
-      <h5
-        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
-      >
-        Start the game when everyone is ready
-      </h5>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`snapshot 2`] = `
+exports[`homeSnapShot 1`] = `
 <div>
   <header
     className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1hc7nu0-MuiPaper-root-MuiAppBar-root"
@@ -301,6 +199,113 @@ exports[`snapshot 2`] = `
           </a>
         </ul>
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`snapshot 1`] = `
+<div>
+  <h1
+    className="MuiTypography-root MuiTypography-h1 tutorial-title css-o2w69a-MuiTypography-root"
+  >
+    How to play the game?
+  </h1>
+  <div
+    className="tut-flex"
+  >
+    <div
+      className="tutorial-container"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 tutorial-text css-5lbw0b-MuiTypography-root"
+      >
+        To join a game:
+      </h4>
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Scroll down in the home page to reveal the button
+      </h5>
+      <img
+        alt="tutorial"
+        className="tutorial-img"
+        src="img1.png"
+      />
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Enter a room code to join a lobby
+      </h5>
+      <img
+        alt="tutorial"
+        className="tutorial-img"
+        src="img2.png"
+      />
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Wait for the host to start the game
+      </h5>
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Progress the game by answering the questions
+      </h5>
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Try not to fall behind, if the ghost catches up to you, you're dead
+      </h5>
+      <img
+        alt="tutorial"
+        className="tutorial-img"
+        src="img3.png"
+      />
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Win the game by being the first to cross the line
+      </h5>
+    </div>
+    <div
+      className="tutorial-container"
+    >
+      <h4
+        className="MuiTypography-root MuiTypography-h4 tutorial-text css-5lbw0b-MuiTypography-root"
+      >
+        To host a game:
+      </h4>
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Click "New Room" from the home page
+      </h5>
+      <img
+        alt="tutorial"
+        className="tutorial-img"
+        src="img10.png"
+      />
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Select the number of players, rounds, and a category of questions to play for
+      </h5>
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Share the room code with your friends for them to join
+      </h5>
+      <img
+        alt="tutorial"
+        className="tutorial-img"
+        src="img11.png"
+      />
+      <h5
+        className="MuiTypography-root MuiTypography-h5 tutorial-text css-ag7rrr-MuiTypography-root"
+      >
+        Start the game when everyone is ready
+      </h5>
     </div>
   </div>
 </div>

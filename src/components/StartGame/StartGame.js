@@ -75,7 +75,7 @@ export const StartGame = () => {
                   id="categorySelect"
                 >
                   {category.map((c) => (
-                    <option>{c.name}</option>
+                    <option key={c.name}>{c.name}</option>
                   ))}
                 </select>
                 <hr></hr>
@@ -84,7 +84,7 @@ export const StartGame = () => {
                 <br></br>
                 <select className="dropDown" name="player" id="playerSelect">
                   {players.map((player) => (
-                    <option>{player}</option>
+                    <option key={player}>{player}</option>
                   ))}
                 </select>
 
@@ -94,7 +94,7 @@ export const StartGame = () => {
                 <br></br>
                 <select className="dropDown" name="round" id="roundSelect">
                   {rounds.map((round) => (
-                    <option>{round}</option>
+                    <option key={round}>{round}</option>
                   ))}
                 </select>
                 <br></br>

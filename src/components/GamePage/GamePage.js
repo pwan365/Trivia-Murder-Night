@@ -159,7 +159,7 @@ const GamePage = () => {
           <Grid container spacing={2} style={{ marginBottom: "24px" }}>
             {quiz.answers.map((answer) => {
               return (
-                <Grid item xs={6}>
+                <Grid item xs={6} key={answer.context}>
                   <Card>
                     <Button
                       style={{ width: "100%" }}

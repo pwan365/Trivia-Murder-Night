@@ -68,7 +68,11 @@ const Header = () => {
             <Grid>
               {headerButtons.map((item) => {
                 return (
-                  <Link to={item.path} style={{ textDecoration: "none" }}>
+                  <Link
+                    to={item.path}
+                    style={{ textDecoration: "none" }}
+                    key={item.title}
+                  >
                     <Button key={item.title} style={{ marginRight: "20px" }}>
                       <Typography style={{ color: "white" }}>
                         {item.title}
@@ -108,8 +112,9 @@ const Header = () => {
               <Link
                 to={item.path}
                 style={{ textDecoration: "none", color: "black" }}
+                key={item.path}
               >
-                <ListItem button key={item.title}>
+                <ListItem button>
                   <ListItemText primary={item.title} />
                 </ListItem>
               </Link>

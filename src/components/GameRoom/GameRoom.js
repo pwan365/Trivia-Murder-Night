@@ -92,6 +92,7 @@ const GameRoom = () => {
                     maxWidth: 360,
                     bgcolor: "background.paper",
                   }}
+                  key={id}
                 >
                   <ListItem>
                     <ListItemAvatar>
