@@ -11,11 +11,6 @@ const QuestionSchema = new Schema({
         default: ""
     },
 
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category'
-    },
-
     answers: [
         {
             type: Schema.Types.ObjectId,
