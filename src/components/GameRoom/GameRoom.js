@@ -16,6 +16,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { SocketContext } from "../../context/socket";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const GameRoom = () => {
   const socket = useContext(SocketContext);
@@ -63,6 +64,9 @@ const GameRoom = () => {
             justifyContent: "space-around",
           }}
         >
+          <Button onClick={() => window.location.reload(false)}>
+            <ArrowBackIcon />
+          </Button>
           <Grid container spacing={2}>
             <Grid item xs={3}>
               <Typography variant="h6">Room: {detail.code}</Typography>
